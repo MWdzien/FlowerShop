@@ -53,3 +53,121 @@ const imageObserver = new IntersectionObserver(handleImageIntersection, {
 allImages.forEach(item => {
     imageObserver.observe(item);
 })
+
+
+
+
+document.getElementById('contactForm').addEventListener('submit', e => {
+    e.preventDefault();
+    let hasErrors = false;
+
+    let name = document.getElementById('name').value.trim();
+    let email = document.getElementById('email').value.replaceAll(" ", "");
+    let message = document.getElementById('message').value.trim();
+
+    if (name.length < 2 || name.length > 60){
+        document.getElementById('nameError').textContent = "Name has to be between 2 and 60 characters long!";
+        hasErrors = true;
+    } else {
+        document.getElementById('nameError').textContent = "";
+        hasErrors = false;
+    }
+
+    if ((/^[\w-]\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email))){
+        document.getElementById('emailError').textContent = "Email address is invalid!";
+        hasErrors = true;
+    } else {
+        document.getElementById('emailError').textContent = "";
+        hasErrors = false;
+    }
+
+    if(message.length < 1){
+        document.getElementById('messageError').textContent = "Message is required!";
+        hasErrors = true;
+    } else {
+        document.getElementById('messageError').textContent = "";
+        hasErrors = false;
+    }
+
+    if (hasErrors){
+        document.getElementById('errorSummary').textContent = "hasErrors";
+    } else {
+        this.submit();
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+function submit(e){
+    e.preventDefault();
+
+    let hasErrors = false;
+
+    let name = document.getElementById('name').value.replaceAll(" ", "");
+    let email = document.getElementById('email').value.replaceAll(" ", "");
+    let message = document.getElementById('message').value;
+
+    if (name.length < 2 || name.length > 60) {
+        document.getElementById('nameError').textContent = "Name must be between 2 and 60 characters long!";
+        hasErrors = true;
+    }
+
+    if (!email.test('[\\w]+@[\\w]+\\.[\\w]+')){
+        document.getElementById('emailError').textContent = "Email is invalid";
+        hasErrors = true;
+    }
+
+
+    if (hasErrors) {
+
+    }
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
