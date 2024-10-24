@@ -61,7 +61,8 @@ document.getElementById('contactForm').addEventListener('submit', e => {
     e.preventDefault();
     let hasErrors = false;
 
-    let name = document.getElementById('name').value.trim();
+    let emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+    let name = document.getElementById('name').value.replaceAll(" ", "");
     let email = document.getElementById('email').value.replaceAll(" ", "");
     let message = document.getElementById('message').value.trim();
 
@@ -70,15 +71,13 @@ document.getElementById('contactForm').addEventListener('submit', e => {
         hasErrors = true;
     } else {
         document.getElementById('nameError').textContent = "";
-        hasErrors = false;
     }
 
-    if ((/^[\w-]\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email))){
+    if (!emailRegex.test(email) || email.length < 5){
         document.getElementById('emailError').textContent = "Email address is invalid!";
         hasErrors = true;
     } else {
         document.getElementById('emailError').textContent = "";
-        hasErrors = false;
     }
 
     if(message.length < 1){
@@ -86,13 +85,12 @@ document.getElementById('contactForm').addEventListener('submit', e => {
         hasErrors = true;
     } else {
         document.getElementById('messageError').textContent = "";
-        hasErrors = false;
     }
 
     if (hasErrors){
-        document.getElementById('errorSummary').textContent = "hasErrors";
+        document.getElementById('errorSummary').textContent = "Correct errors before submitting";
     } else {
-        this.submit();
+        e.target.submit();
     }
 })
 
